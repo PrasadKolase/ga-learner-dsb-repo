@@ -72,4 +72,6 @@ low = census[census[:,1]<=10]
 avg_pay_high = np.mean(census[census[:,1]>10][:,7])
 avg_pay_low = np.mean(census[census[:,1]<=10][:,7])
 
+print("Highly Educated Peoples : ",avg_pay_high)
 
+print("Low Educated Peoples : ",avg_pay_low)
