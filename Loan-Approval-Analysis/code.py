@@ -93,6 +93,7 @@ loan_groupby = banks.groupby('Loan_Status')
 
 loan_groupby = loan_groupby[['ApplicantIncome', 'Credit_History']]
 
+# Check the mean value
 mean_values = loan_groupby.mean()
 print(mean_values)
 
