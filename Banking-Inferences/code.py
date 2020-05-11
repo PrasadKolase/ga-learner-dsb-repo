@@ -54,8 +54,8 @@ for i in range(len(sample_size)):
     for j in range(1000):
         m.append(data['installment'].sample(n=sample_size[i]).mean())
     mean_series = pd.Series(m)
-    plt.hist(mean_series, bins=25)
-
+    axes[i].hist(mean_series, normed=True)
+plt.show()
 
 # --------------
 #Importing header files
@@ -111,6 +111,3 @@ chi2, p, dof, ex = chi2_contingency(observed)
 
 print("chi2 value :",chi2)
 print("Critical value :",critical_value)
-
-
-
