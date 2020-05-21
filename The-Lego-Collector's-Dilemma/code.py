@@ -5,8 +5,10 @@ from sklearn.cross_validation import train_test_split
 # code starts here
 df = pd.read_csv(path)
 print(df.head())
-X = df[['ages','num_reviews','piece_count','play_star_rating','review_difficulty','star_rating','theme_name','val_star_rating','country']]
+
+X = df.drop('list_price',axis=1)
 y = pd.Series(df['list_price'])
+
 X_train,X_test,y_train,y_test = train_test_split(X,y, test_size = 0.3, random_state = 6)
 # code ends here
 
@@ -22,8 +24,11 @@ fig ,axes = plt.subplots(3,3, figsize=(30,30))
 
 for i in range(3):
     for j in range(3):
+        axes[i,j].set_title(col)
         col = cols[i*3+j]
         axes[i,j].scatter(X_train[col],y_train)
+        axes[i,j].set_xlabel(col)
+        axes[i,j].set_ylabel('list_price')
 plt.show()
 # code ends here
 
