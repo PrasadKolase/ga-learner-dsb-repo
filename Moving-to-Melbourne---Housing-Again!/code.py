@@ -69,7 +69,7 @@ from sklearn.model_selection import cross_val_score
 #Code starts here
 regressor = LinearRegression()
 
-score = cross_val_score(regressor, X_train, y_train, cv=10)
+score = cross_val_score(regressor, X_train, y_train, scoring= 'r2', cv=10)
 
 mean_score = score.mean()
 print("mean_score :",mean_score)
