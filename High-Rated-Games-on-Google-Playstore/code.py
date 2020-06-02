@@ -44,6 +44,7 @@ print(missing_data_1)
 # --------------
 
 #Code starts here
+plt.figure(figsize = (10,10))
 sns.catplot(x="Category", y="Rating", data=data, kind="box", height=10)
 
 plt.xticks(rotation=90)
@@ -62,13 +63,13 @@ print(data['Installs'].value_counts())
 
 data['Installs'] = data['Installs'].apply(lambda x: int(str(x)[:-1].replace(',','')))
 
-# data['Installs'].astype('int64')
-
 le = LabelEncoder()
 
 data['Installs'] = le.fit_transform(data['Installs'])
 
+plt.figure(figsize = (10,10))
 sns.regplot(x="Installs", y="Rating", data=data)
+
 plt.title('Rating vs Installs [RegPlot]')
 plt.show()
 #Code ends here
@@ -85,6 +86,7 @@ data['Price']=data['Price'].str.replace('$','')
 
 data['Price'] = data['Price'].astype(float)
 
+plt.figure(figsize = (10,10))
 sns.regplot(x="Price", y="Rating", data=data)
 
 plt.title('Rating vs Price [RegPlot]')
@@ -95,16 +97,18 @@ plt.show()
 # --------------
 
 #Code starts here
+print( len(data['Genres'].unique()) , "genres")
+
 data['Genres'] = data['Genres'].apply(lambda x:x.split(';')[0])
 
 gr_mean  = data[['Genres','Rating']].groupby('Genres', as_index=False).mean()
-print(gr_mean)
+
 print(gr_mean.describe())
 
 gr_mean = gr_mean.sort_values(by='Rating')
 
-print(gr_mean.iloc[0,:])
-print(gr_mean.iloc[-1:,:])
+print(gr_mean.head(1))
+print(gr_mean.tail(1))
 #Code ends here
 
 
