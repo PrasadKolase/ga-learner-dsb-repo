@@ -43,7 +43,7 @@ y = dataset.drop('Cover_Type', axis=1)
 #Plot violin for all attributes
 for i in range(size):
     sns.violinplot(x=y.iloc[:,i])
-plt.show()
+    plt.show()
 
 
 # --------------
@@ -137,10 +137,10 @@ predictions_all_features = clf1.predict(X_test)
 score_all_features = accuracy_score(Y_test, predictions_all_features)
 print(score_all_features)
 
-model_fit_top_features = clf.fit(scaled_features_train_df, Y_train)
-predictions_top_features = clf.predict(scaled_features_train_df)
+model_fit_top_features = clf.fit(scaled_features_train_df[top_k_predictors], Y_train)
+predictions_top_features = clf.predict(scaled_features_test_df[top_k_predictors])
 
-score_top_features = accuracy_score(Y_train, predictions_top_features)
+score_top_features = accuracy_score(Y_test, predictions_top_features)
 print(score_top_features)
 
 
