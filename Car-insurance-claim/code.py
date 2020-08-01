@@ -6,25 +6,27 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 # Code starts here
+# Load the data
 df = pd.read_csv(path)
-print(df.head())
-print(df.info)
 
-df['INCOME'].fillna(value='$0', inplace=True)
-df['INCOME'] = df['INCOME'].apply(lambda x:str(x)[1:].replace(',',''))
+# replace the $ symbol
+columns = ['INCOME','HOME_VAL','BLUEBOOK','OLDCLAIM','CLM_AMT']
 
-df['HOME_VAL'].fillna(value='$0', inplace=True)
-df['HOME_VAL'] = df['HOME_VAL'].apply(lambda x:str(x)[1:].replace(',',''))
+for col in columns:
+    df[col].replace({'\$': '', ',': ''}, regex=True,inplace=True)
 
-df['BLUEBOOK'] = df['BLUEBOOK'].apply(lambda x:str(x)[1:].replace(',',''))
-df['OLDCLAIM'] = df['OLDCLAIM'].apply(lambda x:str(x)[1:].replace(',',''))
-df['CLM_AMT'] = df['CLM_AMT'].apply(lambda x:str(x)[1:].replace(',',''))
+# store independent variable
+X = df.drop(['CLAIM_FLAG'],axis=1)
 
-X = df.drop('CLAIM_FLAG', axis=1)
+# store dependent variable
 y = df['CLAIM_FLAG']
 
+# Check the value counts
 count = y.value_counts()
-X_train,X_test,y_train,y_test = train_test_split(X, y, test_size = 0.3, random_state = 6)
+print(count)
+
+# spliting the dataset
+X_train,X_test,y_train,y_test = train_test_split(X,y ,test_size=0.3,random_state=6)
 # Code ends here
 
 
